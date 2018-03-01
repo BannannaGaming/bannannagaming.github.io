@@ -118,6 +118,7 @@ $(document).ready(function () {
         });
         //RAM
         $.each(json.ram, function (key, value) {
+
             var option = $('<option />').val(value.price).text(value.name + " " + value.size + " for " + value.price);
             if (value.price === "");
             else if (value.modules.indexOf("1x4") !== -1)   { $("#opt1x4").append(option); }
@@ -146,6 +147,15 @@ $(document).ready(function () {
             else if (value.modules.indexOf("8x16") !== -1)  { $("#opt8x16").append(option); }
 
         });
+
+    $.each(json.ram, function (key, value) {
+		var i = 0;
+        var option = $('<option />').val(value.price).text(value.name + " " + value.size + " for " + value.price);
+        var modu = ["1x4", "6x4"];
+        while (i < modu){
+        	(value.modules.indexOf(modu) !== -1); { $("#optn" + modu).append(option); }
+
+		}});
         //Power Supply (PSU)
         $.each(json.psu, function (key, value) {
             var option = $('<option />').val(value.price).text(value.name + " " + value.watts + " for " + value.price);
