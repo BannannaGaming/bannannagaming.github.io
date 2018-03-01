@@ -62,7 +62,7 @@ $(document).ready(function () {
             else if (value.formf.indexOf("ATX") !== -1)         { $("#optAtx").append(option); }
             else if (value.formf.indexOf("Mini ITX") !== -1)    { $("#optMiitx").append(option); }
             else {$("#optMatx").append(option); }
-           
+
         });
         //Case
         $.each(json.case, function (key, value) {
@@ -118,7 +118,7 @@ $(document).ready(function () {
         });
         //RAM
         $.each(json.ram, function (key, value) {
-
+            list = ["1x4", "2x2", "3x2", "1x8", "2x4",]
             var option = $('<option />').val(value.price).text(value.name + " " + value.size + " for " + value.price);
             if (value.price === "");
             else if (value.modules.indexOf("1x4") !== -1)   { $("#opt1x4").append(option); }
@@ -147,14 +147,33 @@ $(document).ready(function () {
             else if (value.modules.indexOf("8x16") !== -1)  { $("#opt8x16").append(option); }
 
         });
-
+    /*
     $.each(json.ram, function (key, value) {
         var option = $('<option />').val(value.price).text(value.name + " " + value.size + " for " + value.price);
         var list = ["4x4", "1x4"]
-        for (i in list);
+        if (value.price === "");
+        else for (var i in list);
             if (value.modules.indexOf(i) !== -1);
                 $("#optn" + list[i]).append(option)
-		});
+        });
+    */
+    $.each(json.ram, function () {
+        var option = $('<option />').val(this.price).text(this.name + " " + this.size + " for " + this.price);
+        let modulesString = this.modules.substring(0, this.modules.length-2);
+        let optngrpel = $("#optn" + this.modulesString);
+        console.log('value.modules: '+this.modulesString);
+        console.log('optngroupEl ');
+        console.log(optngrpel);
+
+        if (this.price === ""){
+
+        }else{
+          optngrpel.append(option)
+
+        }
+
+
+        });
         //Power Supply (PSU)
         $.each(json.psu, function (key, value) {
             var option = $('<option />').val(value.price).text(value.name + " " + value.watts + " for " + value.price);
