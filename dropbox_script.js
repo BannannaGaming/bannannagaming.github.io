@@ -149,13 +149,12 @@ $(document).ready(function () {
         });
 
     $.each(json.ram, function (key, value) {
-		var i = 0;
         var option = $('<option />').val(value.price).text(value.name + " " + value.size + " for " + value.price);
-        var modu = ["1x4", "6x4"];
-        while (i < modu){
-        	(value.modules.indexOf(modu) !== -1); { $("#optn" + modu).append(option); }
-
-		}});
+        var list = ["4x4", "1x4"]
+        for (i in list);
+            if (value.modules.indexOf(i) !== -1);
+                $("#optn" + list[i]).append(option)
+		});
         //Power Supply (PSU)
         $.each(json.psu, function (key, value) {
             var option = $('<option />').val(value.price).text(value.name + " " + value.watts + " for " + value.price);
