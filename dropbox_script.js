@@ -1,38 +1,6 @@
 $(document).ready(function () {
     var Price = 0;
 
-    $('#btnSort').click(function (e) {
-
-        sortSelect('#optI7', 'text', 'asc');
-        sortSelect('#optI5', 'text', 'asc');
-        $('#dropDownDest').get(0).selectedIndex = 0;
-
-    }); // event listener click
-
-    $('#btnSortPrice').click(function (e) {
-
-        sortSelect('#optI7', 'value', 'desc');
-        sortSelect('#optI5', 'value', 'desc');
-        $('#dropDownDest').get(0).selectedIndex = 0;
-
-    }); // event listener click
-
-    $('#btnSort2').click(function (e) {
-
-        sortSelect('#optNvi', 'value', 'desc');
-        sortSelect('#optGamd', 'value', 'desc');
-        sortSelect('#dropDownDest2', 'text', 'asc');
-
-    }); // event listener click
-
-    $('#btnSortPrice2').click(function (e) {
-
-        sortSelect('#optNvi', 'value', 'desc');
-        sortSelect('#optGamd', 'value', 'desc');
-        sortSelect('#dropDownDest2', 'value', 'desc');
-
-    }); // event listener click
-
     $.getJSON('json.json', function (json) {
         //CPU
         $.each(json.cpu, function (key, value) {
@@ -90,31 +58,31 @@ $(document).ready(function () {
         });
         //HDD
         $.each(json.drives, function (key, value) {
-            var option = $('<option />').val(value.price).text(value.name + " for " + value.price);
+            var option = $('<option />').val(value.price).text(value.name + " " + value.capacity + " for " + value.price);
             if (value.price === "");
-            else if (value.type.indexOf("RPM") !== -1 || (value.capacity.indexOf("120GB")) !== -1)   { $("#optHdd120GB").append(option); }
-            else if (value.type.indexOf("RPM") !== -1 || (value.capacity.indexOf("250GB")) !== -1)  { $("#optHdd250GB").append(option); }
-            else if (value.type.indexOf("RPM") !== -1 || (value.capacity.indexOf("256GB")) !== -1)  { $("#optHdd256GB").append(option); }
-            else if (value.type.indexOf("RPM") !== -1 || (value.capacity.indexOf("480GB")) !== -1)  { $("#optHdd480GB").append(option); }
-            else if (value.type.indexOf("RPM") !== -1 || (value.capacity.indexOf("500GB")) !== -1)  { $("#optHdd500GB").append(option); }
-            else if (value.type.indexOf("RPM") !== -1 || (value.capacity.indexOf("520GB")) !== -1)  { $("#optHdd520GB").append(option); }
-            else if (value.type.indexOf("RPM") !== -1 || (value.capacity.indexOf("1TB")) !== -1)    { $("#optHdd1TB").append(option); }
-            else if (value.type.indexOf("RPM") !== -1 || (value.capacity.indexOf("2TB")) !== -1)    { $("#optHdd2TB").append(option); }
-            else if (value.type.indexOf("RPM") !== -1 || (value.capacity.indexOf("4TB")) !== -1)    { $("#optHdd4TB").append(option); }
+            else if (value.type.indexOf("RPM") !== -1 && (value.capacity.indexOf("120GB")) !== -1)   { $("#optHdd120GB").append(option); }
+            else if (value.type.indexOf("RPM") !== -1 && (value.capacity.indexOf("250GB")) !== -1)  { $("#optHdd250GB").append(option); }
+            else if (value.type.indexOf("RPM") !== -1 && (value.capacity.indexOf("256GB")) !== -1)  { $("#optHdd256GB").append(option); }
+            else if (value.type.indexOf("RPM") !== -1 && (value.capacity.indexOf("480GB")) !== -1)  { $("#optHdd480GB").append(option); }
+            else if (value.type.indexOf("RPM") !== -1 && (value.capacity.indexOf("500GB")) !== -1)  { $("#optHdd500GB").append(option); }
+            else if (value.type.indexOf("RPM") !== -1 && (value.capacity.indexOf("520GB")) !== -1)  { $("#optHdd520GB").append(option); }
+            else if (value.type.indexOf("RPM") !== -1 && (value.capacity.indexOf("1TB")) !== -1)    { $("#optHdd1TB").append(option); }
+            else if (value.type.indexOf("RPM") !== -1 && (value.capacity.indexOf("2TB")) !== -1)    { $("#optHdd2TB").append(option); }
+            else if (value.type.indexOf("RPM") !== -1 && (value.capacity.indexOf("4TB")) !== -1)    { $("#optHdd4TB").append(option); }
         });
         //SSD
         $.each(json.drives, function (key, value) {
-            var option = $('<option />').val(value.price).text(value.name + " for " + value.price);
+            var option = $('<option />').val(value.price).text(value.name + " " + value.capacity + " for " + value.price);
             if (value.price === "");
-            else if (value.type.indexOf("SSD") !== -1 || (value.capacity.indexOf("120GB")) !== -1)  { $("#optSsd120GB").append(option); }
-            else if (value.type.indexOf("SSD") !== -1 || (value.capacity.indexOf("250GB")) !== -1)  { $("#optSsd250GB").append(option); }
-            else if (value.type.indexOf("SSD") !== -1 || (value.capacity.indexOf("256GB")) !== -1)  { $("#optSsd256GB").append(option); }
-            else if (value.type.indexOf("SSD") !== -1 || (value.capacity.indexOf("480GB")) !== -1)  { $("#optSsd480GB").append(option); }
-            else if (value.type.indexOf("SSD") !== -1 || (value.capacity.indexOf("500GB")) !== -1)  { $("#optSsd500GB").append(option); }
-            else if (value.type.indexOf("SSD") !== -1 || (value.capacity.indexOf("520GB")) !== -1)  { $("#optSsd520GB").append(option); }
-            else if (value.type.indexOf("SSD") !== -1 || (value.capacity.indexOf("1TB")) !== -1)    { $("#optSsd1TB").append(option); }
-            else if (value.type.indexOf("SSD") !== -1 || (value.capacity.indexOf("2TB")) !== -1)    { $("#optSsd2TB").append(option); }
-            else if (value.type.indexOf("SSD") !== -1 || (value.capacity.indexOf("4TB")) !== -1)    { $("#optSsd4TB").append(option); }
+            else if (value.type.indexOf("SSD") !== -1 && (value.capacity.indexOf("120GB")) !== -1)  { $("#optSsd120GB").append(option); }
+            else if (value.type.indexOf("SSD") !== -1 && (value.capacity.indexOf("250GB")) !== -1)  { $("#optSsd250GB").append(option); }
+            else if (value.type.indexOf("SSD") !== -1 && (value.capacity.indexOf("256GB")) !== -1)  { $("#optSsd256GB").append(option); }
+            else if (value.type.indexOf("SSD") !== -1 && (value.capacity.indexOf("480GB")) !== -1)  { $("#optSsd480GB").append(option); }
+            else if (value.type.indexOf("SSD") !== -1 && (value.capacity.indexOf("500GB")) !== -1)  { $("#optSsd500GB").append(option); }
+            else if (value.type.indexOf("SSD") !== -1 && (value.capacity.indexOf("520GB")) !== -1)  { $("#optSsd520GB").append(option); }
+            else if (value.type.indexOf("SSD") !== -1 && (value.capacity.indexOf("1TB")) !== -1)    { $("#optSsd1TB").append(option); }
+            else if (value.type.indexOf("SSD") !== -1 && (value.capacity.indexOf("2TB")) !== -1)    { $("#optSsd2TB").append(option); }
+            else if (value.type.indexOf("SSD") !== -1 && (value.capacity.indexOf("4TB")) !== -1)    { $("#optSsd4TB").append(option); }
         });
         //RAM
         $.each(json.ram, function (key, value) {
@@ -145,33 +113,6 @@ $(document).ready(function () {
             else if (value.modules.indexOf("8x8") !== -1)   { $("#opt8x8").append(option); }
             else if (value.modules.indexOf("3x32") !== -1)  { $("#opt3x32").append(option); }
             else if (value.modules.indexOf("8x16") !== -1)  { $("#opt8x16").append(option); }
-
-        });
-    /*
-    $.each(json.ram, function (key, value) {
-        var option = $('<option />').val(value.price).text(value.name + " " + value.size + " for " + value.price);
-        var list = ["4x4", "1x4"]
-        if (value.price === "");
-        else for (var i in list);
-            if (value.modules.indexOf(i) !== -1);
-                $("#optn" + list[i]).append(option)
-        });
-    */
-    $.each(json.ram, function () {
-        var option = $('<option />').val(this.price).text(this.name + " " + this.size + " for " + this.price);
-        let modulesString = this.modules.substring(0, this.modules.length-2);
-        let optngrpel = $("#optn" + this.modulesString);
-        console.log('value.modules: '+this.modulesString);
-        console.log('optngroupEl ');
-        console.log(optngrpel);
-
-        if (this.price === ""){
-
-        }else{
-          optngrpel.append(option)
-
-        }
-
 
         });
         //Power Supply (PSU)
@@ -207,46 +148,14 @@ $(document).ready(function () {
             var pricessd = parseFloat($('#dropDownDest7 option:selected').val().substring(1));
             var pricemotherboard = parseFloat($('#dropDownDest3 option:selected').val().substring(1));
             var priceram = parseFloat($('#dropDownDest8 option:selected').val().substring(1));
-            var pricepsu = parseFloat($('#dropDownDest7 option:selected').val().substring(1));
+            var pricepsu = parseFloat($('#dropDownDest9 option:selected').val().substring(1));
             Price = pricecpu + pricegpu + pricemotherboard + pricecase + pricecpucooler + pricehdd + pricessd + priceram + pricepsu;
-            var Pricestring = String.fromCharCode('163') + Price;
+            p = parseFloat((Price).toFixed(2));
+            pi = parseFloat((p * 1.2).toFixed(2));
+            var PriceIstring = 'Valuation Price : ' + String.fromCharCode('163') + pi;
+            var Pricestring = 'Total Base Price : ' + String.fromCharCode('163') + p;
             $('#drop1Label').text(Pricestring);
-
+            $('#drop2Label').text(PriceIstring);
         };
     });
-
-
-
-
-
-    var sortSelect = function (select, attr, order) {
-        if (attr === 'text') {
-            if (order === 'asc') {
-                $(select).html($(select).children('option').sort(function (x, y) {
-                    return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
-                }));
-                e.preventDefault();
-            }// end asc
-            if (order === 'desc') {
-                $(select).html($(select).children('option').sort(function (y, x) {
-                    return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
-                }));
-                e.preventDefault();
-            }// end desc
-        }
-        if (attr === 'value') {
-            if (order === 'asc') {
-                $(select).html($(select).children('option').sort(function (x, y) {
-                    return parseFloat($(x).val().substring(1)) < parseFloat($(y).val().substring(1)) ? -1 : 1;
-                }));
-                e.preventDefault();
-            }// end asc
-            if (order === 'desc') {
-                $(select).html($(select).children('option').sort(function (y, x) {
-                    return parseFloat($(x).val().substring(1)) < parseFloat($(y).val().substring(1)) ? -1 : 1;
-                }));
-                e.preventDefault();
-            }// end desc
-        }
-    };
 });
