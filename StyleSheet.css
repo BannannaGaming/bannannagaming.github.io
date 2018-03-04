@@ -31,18 +31,18 @@ li a { /*This sets the design for each list item*/
 .button {
     background: none;
     border: none;
-    color: white;
     display: inline-block;
     margin: 0;
     padding: 1%;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
     position:relative;
-    cursor: pointer;
     top: 25%;
     left: 15%;
 }
 
+img{
+  width: 100%;
+  height: auto;
+}
 .button1 a {
     position: absolute;
     top: 50%;
