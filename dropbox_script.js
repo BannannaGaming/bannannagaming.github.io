@@ -141,7 +141,7 @@ $(document).ready(function () {
         $('#dropDownDest9').on('change', function () { updatePrice(); });
 
 
-        var updatePrice = function () {
+        function updatePrice () {
             var pricecpu = parseFloat($('#dropDownDest option:selected').val().substring(1));
             var pricegpu = parseFloat($('#dropDownDest2 option:selected').val().substring(1));
             var pricecase = parseFloat($('#dropDownDest4 option:selected').val().substring(1));
@@ -179,79 +179,86 @@ $(document).ready(function () {
             var decMotherboardS = decmotherboard.split(" for ")[0];
             var decRamS = decram.split(" for ")[0];
             var decPsuS = decpsu.split(" for ")[0];
-            console.log(pricecpu)
-        
-            var n = new Date()
 
-            $('.download-pdf').click(function () {
-
-                var name = prompt('What is your name?');
-                var house = prompt('What is your house name / number?');
-                var street = prompt('What is your street name?');
-                var city = prompt('What city do you live in or near?');
-                var postcode = prompt('What is your postcode?');
-
-                var doc = new jsPDF({
-                    orientation: 'portrait',
-                    unit: 'cm',
-                    format: [21, 29]
-                })
-
-                doc.rect(1, 6, 19, 11);                                                     //Table Body
-                doc.rect(1, 6, 19, 2);                                                      //Header
-                doc.rect(1, 8, 19, 1);                                                      //Component 1 = CPU
-                doc.rect(1, 9, 19, 1);                                                      //Component 2 = GPU
-                doc.rect(1, 10, 19, 1);                                                     //Component 3 = RAM
-                doc.rect(1, 11, 19, 1);                                                     //Component 4 = Motherboard
-                doc.rect(1, 12, 19, 1);                                                     //Component 5 = CPU Cooler
-                doc.rect(1, 13, 19, 1);                                                     //Component 6 = SSD
-                doc.rect(1, 14, 19, 1);                                                     //Component 7 = HDD
-                doc.rect(1, 15, 19, 1);                                                     //Component 8 = PSU
-                doc.rect(1, 16, 19, 1);                                                     //Component 9 = Case
-                doc.rect(15, 17, 5, 2);                                                     //Total Base Price
-
-                doc.setFontSize(20);                                                        //Font size 20
-                doc.text('Parts List', 7, 7);                                               //Price List Header
-                doc.rect(15, 6, 5, 15);                                                     //Price List Rectangle
-                doc.text('Price List', 16, 7);                                              //Price List Header
-
-                doc.setFontSize(10);
-                doc.text('CPU : ' + decCpuS, 2, 8.5);                                       //Component 1 = CPU
-                doc.text('GPU : ' + decGpuS, 2, 9.5);                                       //Component 2 = GPU
-                doc.text('RAM : ' + decRamS, 2, 10.5);                                      //Component 3 = RAM
-                doc.text('Motherboard : ' + decMotherboardS, 2, 11.5);                      //Component 4 = Motherboard
-                doc.text('CPU Cooler : ' + decCpuCoolerS, 2, 12.5);                         //Component 5 = CPU Cooler
-                doc.text('SSD : ' + decSsdS, 2, 13.5);                                      //Component 6 = SSD
-                doc.text('HDD : ' + decHddS, 2, 14.5);                                      //Component 7 = HDD
-                doc.text('PSU : ' + decPsuS, 2, 15.5);                                      //Component 8 = PSU
-                doc.text('Case : ' + decCaseS, 2, 16.5);                                    //Component 9 = Case
-                
-
-                doc.setFontSize(12);
-                doc.text(String.fromCharCode('163') + pricecpu, 16.5, 8.5);                 //CPU Price
-                doc.text(String.fromCharCode('163') + pricegpu, 16.5, 9.5);                 //GPU Price
-                doc.text(String.fromCharCode('163') + priceram, 16.5, 10.5);                //RAM Price
-                doc.text(String.fromCharCode('163') + pricemotherboard, 16.5, 11.5);        //Motherboard Price
-                doc.text(String.fromCharCode('163') + pricecpucooler, 16.5, 12.5);          //CPU Cooler Price
-                doc.text(String.fromCharCode('163') + pricessd, 16.5, 13.5);                //SSD Price
-                doc.text(String.fromCharCode('163') + pricehdd, 16.5, 14.5);                //HDD Price
-                doc.text(String.fromCharCode('163') + pricepsu, 16.5, 15.5);                //PSU Price
-                doc.text(String.fromCharCode('163') + pricecase, 16.5, 16.5);               //Case Price
-                doc.text('Total Base Price', 15.5, 17.9);                                   //Total Base Price
-                doc.text(String.fromCharCode('163') + p, 15.5, 18.5);
-                doc.text('Total Evaluation Price', 15.5, 19.9);                             //Total Base Price + Evaluation
-                doc.text(String.fromCharCode('163') + pi, 15.5, 20.5);
-
-                doc.text(name, 2, 3);
-                doc.text(house, 2, 3.5);
-                doc.text(street, 2, 4);
-                doc.text(city, 2, 4.5);
-                doc.text(postcode, 2, 5);
-
-                doc.save(n + 'test.pdf');
-
-        });
+            return [decCpuS];
+            console.log(updatePrice(decCpuS))
         };
+            // Module 4 - PDF
+            function initDownloadPDF () {
+                $('.download-pdf').click(function () {
+                    console.log(updatePrice(decCpuS))
+                    p = updatePrice();
+                    var n = new Date()
+                    var name = prompt('What is your name?');
+                    var house = prompt('What is your house name / number?');
+                    var street = prompt('What is your street name?');
+                    var city = prompt('What city do you live in or near?');
+                    var postcode = prompt('What is your postcode?');
+
+                    var doc = new jsPDF({
+                        orientation: 'portrait',
+                        unit: 'cm',
+                        format: [21, 29]
+                    });
+
+                    doc.rect(1, 6, 19, 11);                                                     //Table Body
+                    doc.rect(1, 6, 19, 2);                                                      //Header
+                    doc.rect(1, 8, 19, 1);                                                      //Component 1 = CPU
+                    doc.rect(1, 9, 19, 1);                                                      //Component 2 = GPU
+                    doc.rect(1, 10, 19, 1);                                                     //Component 3 = RAM
+                    doc.rect(1, 11, 19, 1);                                                     //Component 4 = Motherboard
+                    doc.rect(1, 12, 19, 1);                                                     //Component 5 = CPU Cooler
+                    doc.rect(1, 13, 19, 1);                                                     //Component 6 = SSD
+                    doc.rect(1, 14, 19, 1);                                                     //Component 7 = HDD
+                    doc.rect(1, 15, 19, 1);                                                     //Component 8 = PSU
+                    doc.rect(1, 16, 19, 1);                                                     //Component 9 = Case
+                    doc.rect(15, 17, 5, 2);                                                     //Total Base Price
+
+                    doc.setFontSize(20);                                                        //Font size 20
+                    doc.text('Parts List', 7, 7);                                               //Price List Header
+                    doc.rect(15, 6, 5, 15);                                                     //Price List Rectangle
+                    doc.text('Price List', 16, 7);                                              //Price List Header
+
+                    doc.setFontSize(10);
+                    doc.text('CPU : ' + p.decCpuS, 2, 8.5);                                       //Component 1 = CPU
+                    doc.text('GPU : ' + p.decGpuS, 2, 9.5);                                       //Component 2 = GPU
+                    doc.text('RAM : ' + p.decRamS, 2, 10.5);                                      //Component 3 = RAM
+                    doc.text('Motherboard : ' + decMotherboardS, 2, 11.5);                      //Component 4 = Motherboard
+                    doc.text('CPU Cooler : ' + decCpuCoolerS, 2, 12.5);                         //Component 5 = CPU Cooler
+                    doc.text('SSD : ' + decSsdS, 2, 13.5);                                      //Component 6 = SSD
+                    doc.text('HDD : ' + decHddS, 2, 14.5);                                      //Component 7 = HDD
+                    doc.text('PSU : ' + decPsuS, 2, 15.5);                                      //Component 8 = PSU
+                    doc.text('Case : ' + decCaseS, 2, 16.5);                                    //Component 9 = Case
+
+
+                    doc.setFontSize(12);
+                    doc.text(String.fromCharCode('163') + pricecpu, 16.5, 8.5);                 //CPU Price
+                    doc.text(String.fromCharCode('163') + pricegpu, 16.5, 9.5);                 //GPU Price
+                    doc.text(String.fromCharCode('163') + priceram, 16.5, 10.5);                //RAM Price
+                    doc.text(String.fromCharCode('163') + pricemotherboard, 16.5, 11.5);        //Motherboard Price
+                    doc.text(String.fromCharCode('163') + pricecpucooler, 16.5, 12.5);          //CPU Cooler Price
+                    doc.text(String.fromCharCode('163') + pricessd, 16.5, 13.5);                //SSD Price
+                    doc.text(String.fromCharCode('163') + pricehdd, 16.5, 14.5);                //HDD Price
+                    doc.text(String.fromCharCode('163') + pricepsu, 16.5, 15.5);                //PSU Price
+                    doc.text(String.fromCharCode('163') + pricecase, 16.5, 16.5);               //Case Price
+                    doc.text('Total Base Price', 15.5, 17.9);                                   //Total Base Price
+                    doc.text(String.fromCharCode('163') + p, 15.5, 18.5);
+                    doc.text('Total Evaluation Price', 15.5, 19.9);                             //Total Base Price + Evaluation
+                    doc.text(String.fromCharCode('163') + pi, 15.5, 20.5);
+
+                    doc.text(name, 2, 3);
+                    doc.text(house, 2, 3.5);
+                    doc.text(street, 2, 4);
+                    doc.text(city, 2, 4.5);
+                    doc.text(postcode, 2, 5);
+
+                    doc.save(n + 'test.pdf');
+
+                });
+            };
+            initDownloadPDF();
         
-        });
     });
+
+});
+
