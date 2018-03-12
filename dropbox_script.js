@@ -154,10 +154,8 @@ $(document).ready(function () {
             Price = pricecpu + pricegpu + pricemotherboard + pricecase + pricecpucooler + pricehdd + pricessd + priceram + pricepsu;
             p = parseFloat((Price).toFixed(2));
             pi = parseFloat((p * 1.2).toFixed(2));
-            var PriceIstring = 'Valuation Price : ' + String.fromCharCode('163') + pi;
-            var Pricestring = 'Total Base Price : ' + String.fromCharCode('163') + p;
-            $('#drop1Label').text(Pricestring);
-            $('#drop2Label').text(PriceIstring);
+            var PriceIstring = 'Total Base Price : ' + String.fromCharCode('163') + p + " | " + 'Valuation Price : ' + String.fromCharCode('163') + pi;
+            $('#1Label').text(PriceIstring);
 
 
             var deccpu = $('#dropDownDest option:selected').text().substring(0);
@@ -203,7 +201,23 @@ $(document).ready(function () {
                 pi: pi,
             };
         };
-            // Module 4 - PDF
+
+        var pop = document.getElementById('popup');
+        var btn = document.getElementById("popupBtn");
+        var span = document.getElementsByClassName("close")[0];
+        btn.onclick = function () {
+            pop.style.display = "block";
+        };
+        span.onclick = function () {
+            pop.style.display = "none";
+        };
+        window.onclick = function (event) {
+            if (event.target == pop) {
+                pop.style.display = "none";
+            }
+        };
+
+        // Module 4 - PDF
             function initDownloadPDF () {
                 $('.download-pdf').click(function () {
                     p = updatePrice();
@@ -219,8 +233,9 @@ $(document).ready(function () {
                         orientation: 'portrait',
                         unit: 'cm',
                         format: [21, 29]
-                    });
-                    doc.addImage(imgData, 'JPEG', 12, 1, 8, 4) 
+                    });                                                                         
+                    doc.addImage(imgData, 'JPEG', 12, 1, 8, 4)                                  //Sets logo image location and size
+                    doc.setLineWidth(0.1)                                                       //Sets Line Width
                     doc.rect(1, 6, 19, 11);                                                     //Table Body
                     doc.rect(1, 6, 19, 2);                                                      //Header
                     doc.rect(1, 8, 19, 1);                                                      //Component 1 = CPU
@@ -233,10 +248,10 @@ $(document).ready(function () {
                     doc.rect(1, 15, 19, 1);                                                     //Component 8 = PSU
                     doc.rect(1, 16, 19, 1);                                                     //Component 9 = Case
                     doc.rect(15, 17, 5, 2);                                                     //Total Base Price
+                    doc.rect(15, 6, 5, 15);                                                     //Price List Rectangle
 
                     doc.setFontSize(20);                                                        //Font size 20
                     doc.text('Parts List', 7, 7);                                               //Price List Header
-                    doc.rect(15, 6, 5, 15);                                                     //Price List Rectangle
                     doc.text('Price List', 16, 7);                                              //Price List Header
 
                     doc.setFontSize(10);
@@ -249,7 +264,6 @@ $(document).ready(function () {
                     doc.text('HDD : ' + p.decHddS, 2, 14.5);                                      //Component 7 = HDD
                     doc.text('PSU : ' + p.decPsuS, 2, 15.5);                                      //Component 8 = PSU
                     doc.text('Case : ' + p.decCaseS, 2, 16.5);                                    //Component 9 = Case
-
 
                     doc.setFontSize(12);
                     doc.text(String.fromCharCode('163') + p.pricecpu, 16.5, 8.5);                 //CPU Price
